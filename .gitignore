@@ -1,0 +1,6 @@
+/openssl
+*.dSYM/
+*.exp
+*.ilk
+*.obj
+*.pdb
