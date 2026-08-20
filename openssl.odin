@@ -94,14 +94,20 @@ SSL :: struct {}
 SSL_CTRL_SET_TLSEXT_HOSTNAME :: 55
 
 TLSEXT_NAMETYPE_host_name :: 0
+SSL_VERIFY_PEER :: 1
+X509_V_OK :: 0
 
 foreign lib {
     TLS_client_method :: proc() -> ^SSL_METHOD ---
     SSL_CTX_new :: proc(method: ^SSL_METHOD) -> ^SSL_CTX ---
+    SSL_CTX_set_default_verify_paths :: proc(ctx: ^SSL_CTX) -> c.int ---
+    SSL_CTX_set_verify :: proc(ctx: ^SSL_CTX, mode: c.int, callback: rawptr) ---
     SSL_new :: proc(ctx: ^SSL_CTX) -> ^SSL ---
     SSL_set_fd :: proc(ssl: ^SSL, fd: c.int) -> c.int ---
     SSL_connect :: proc(ssl: ^SSL) -> c.int ---
     SSL_get_error :: proc(ssl: ^SSL, ret: c.int) -> c.int ---
+    SSL_get_verify_result :: proc(ssl: ^SSL) -> c.long ---
+    SSL_set1_host :: proc(ssl: ^SSL, hostname: cstring) -> c.int ---
     SSL_read :: proc(ssl: ^SSL, buf: [^]byte, num: c.int) -> c.int ---
     SSL_write :: proc(ssl: ^SSL, buf: [^]byte, num: c.int) -> c.int ---
     SSL_free :: proc(ssl: ^SSL) ---
