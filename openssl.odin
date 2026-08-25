@@ -101,6 +101,7 @@ foreign lib {
     TLS_client_method :: proc() -> ^SSL_METHOD ---
     SSL_CTX_new :: proc(method: ^SSL_METHOD) -> ^SSL_CTX ---
     SSL_CTX_set_default_verify_paths :: proc(ctx: ^SSL_CTX) -> c.int ---
+    SSL_CTX_load_verify_locations :: proc(ctx: ^SSL_CTX, ca_file, ca_path: cstring) -> c.int ---
     SSL_CTX_set_verify :: proc(ctx: ^SSL_CTX, mode: c.int, callback: rawptr) ---
     SSL_new :: proc(ctx: ^SSL_CTX) -> ^SSL ---
     SSL_set_fd :: proc(ssl: ^SSL, fd: c.int) -> c.int ---
